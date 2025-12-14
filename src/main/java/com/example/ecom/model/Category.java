@@ -20,9 +20,13 @@ public class Category {
     @Size(min = 5, message = "Category name must contain atleast 5 characters")
     private String categoryName;
 
-    public Category(Long categoryId, String categoryName) {
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> products;
+
+    public Category(Long categoryId, String categoryName, List<Product> products) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+        this.products = products;
     }
 
     public Category() {
@@ -42,5 +46,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
